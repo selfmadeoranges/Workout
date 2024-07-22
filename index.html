@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>운동 로그</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Workout Log</h1>
+            <div class="date-picker">
+                <input type="date" id="workout-date" name="workout-date">
+            </div>
+        </div>
+        <div class="form-container">
+            <div class="workout-form">
+                <div class="form-group">
+                    <label for="workout-name">Workout Name</label>
+                    <input type="text" id="workout-name" placeholder="Enter workout name">
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="sets">Sets</label>
+                        <input type="number" id="sets" value="0">
+                    </div>
+                </div>
+                <button id="add-workout">Add Workout</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="workout-log">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Workout</th>
+                        <th>Weight (kg)</th>
+                        <th>Sets</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Log entries will be added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+
+</html>
