@@ -22,6 +22,21 @@ document.getElementById('add-workout').addEventListener('click', function() {
     }
 });
 
+document.getElementById('filter-button').addEventListener('click', function() {
+    const filterDate = document.getElementById('filter-date').value;
+
+    if (filterDate) {
+        fetch(`http://localhost:5000/api/workouts?date=${filterDate}`)
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('workout-log').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = ''; // 기존 내용을 지우고
+                data.forEach(workout => addWorkoutToTable(workout));
+            })
+            .catch(error => console.error('Error:', error));
+    }
+});
+
 function addWorkoutToTable(workout) {
     const table = document.getElementById('workout-log').getElementsByTagName('tbody')[0];
     const newRow = table.insertRow();
@@ -37,11 +52,17 @@ function addWorkoutToTable(workout) {
     setsCell.textContent = workout.sets;
 }
 
-// 초기 로딩 시 모든 운동 기록 불러오기
+// 오늘 날짜 설정 및 해당 날짜의 운동 기록 로드
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('http://localhost:5000/api/workouts')
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('workout-date').value = today;
+    document.getElementById('filter-date').value = today;
+
+    fetch(`http://localhost:5000/api/workouts?date=${today}`)
         .then(response => response.json())
         .then(data => {
+            const tableBody = document.getElementById('workout-log').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // 기존 내용을 지우고
             data.forEach(workout => addWorkoutToTable(workout));
         })
         .catch(error => console.error('Error:', error));
